@@ -4,6 +4,7 @@ const app=express();
 app.use(express.json());
 require('./db');
 var cors=require('cors');
+app.use(cors());
 app.get('/',(req,res)=>{
     res.send("hello world")
 })
