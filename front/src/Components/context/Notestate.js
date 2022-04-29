@@ -24,7 +24,7 @@ const Notestate = (props) => {
         // update(json);  
         const response=await axios.get(`${host}/api/blog/fetchtravel`,{
             headers:{
-                "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI2YWVjODQ5MWYyYTYyMGZjOGY1ZmMyIn0sImlhdCI6MTY1MTE3NDU1Mn0.FVIk5Pz0zA55ww64zv0iuirJg41RHHWltJ-Q9BBrDxQ"
+                "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI2YWVjODQ5MWYyYTYyMGZjOGY1ZmMyIn0sImlhdCI6MTY1MTIwODkxOH0.ZsRwIOFN8hQfKrps0lcIAvoITEFhoGz0JXyeerzypMU"
             }
         }
        
@@ -33,10 +33,21 @@ const Notestate = (props) => {
         update(response.data);
 
     }
+    const addNote=async(image,description)=>{
 
     
+    const response=await axios.post(`${host}/api/blog/addtravels`,{
+   image,
+   description
+    },{
+headers:{
+    "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI2YWVjODQ5MWYyYTYyMGZjOGY1ZmMyIn0sImlhdCI6MTY1MTIwODkxOH0.ZsRwIOFN8hQfKrps0lcIAvoITEFhoGz0JXyeerzypMU"
+}} );
+update(notes.concat(response.data));
+    }
+    
   return (
-    <NoteContext.Provider value={{ notes,showAll }}>
+    <NoteContext.Provider value={{ notes,showAll,addNote }}>
             {props.children}
         </NoteContext.Provider>
 

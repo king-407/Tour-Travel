@@ -1,24 +1,34 @@
-import React,{useContext,useEffect} from 'react'
+import React,{useContext,useEffect,useState} from 'react'
 import NoteContext from './context/NoteContext';
 const Addblog = () => {
-   
+ 
+   const[details,upDetails]=useState({image:"",description:""})
+   const handleChange=(e)=>{
+    upDetails({...details,[e.target.name]:e.target.value})
+  }
     const context=useContext(NoteContext);
-    const {showAll}=context;
+    const {showAll,addNote}=context;
     useEffect(()=>{
       showAll()
     
       
     }, [])
+    const submit=(e)=>{
+      e.preventDefault()
+addNote(details.image,details.description) 
+upDetails({image:"",description:""}) //form k data ko bhj rhe hai baahar
+    }
+    
   return (
-    <form>
+    <form onSubmit={submit}>
   <div className="mb-3">
     <label for="exampleInputEmail1" className="form-label">image</label>
-    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+    <input type="text" name="image" value={details.image} onChange={handleChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
    
   </div>
   <div className="mb-3">
     <label for="exampleInputPassword1" className="form-label">Description</label>
-    <input type="password" className="form-control" id="exampleInputPassword1"/>
+    <input type="description" onChange={handleChange} name="description" value={details.description} className="form-control" id="exampleInputPassword1" />
   </div>
  
   <button type="submit" className="btn btn-primary">Submit</button>
