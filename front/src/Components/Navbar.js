@@ -3,9 +3,13 @@ import {
    
     Link
   } from "react-router-dom";
-
+import { useHistory } from 'react-router-dom';
 export const Navbar = () => {
- 
+  let history=useHistory();
+ const Logout=()=>{
+   localStorage.removeItem('token');
+   history.push('/login')
+ }
   return <div>
 <nav  className="navbar navbar-expand-lg navbar-light bg-light">
   <div  className="container-fluid">
@@ -16,15 +20,19 @@ export const Navbar = () => {
     <div  className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul  className="navbar-nav me-auto mb-2 mb-lg-0">
         <li  className="nav-item">
-          <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+          <Link className="nav-link active" aria-current="page" to="/diary">Home</Link>
         </li>
         <li  className="nav-item">
-          <Link className="nav-link" to="/about">about</Link>
+          <Link className="nav-link active" aria-current="page" to="/">Intro</Link>
         </li>
+       
        
      
       </ul>
-     
+      {!localStorage.getItem('token') ?<form className="d-flex justify-content-center">
+      <Link className="btn btn-primary mx-2" to="/login" role="button">Login</Link>
+       <Link className="btn btn-primary mx-2" to="/signup" role="button">Signup</Link>
+     </form>:<button className="btn btn-primary mx-2 " onClick={Logout}>Logout</button>}
     
     </div>
   </div>

@@ -1,0 +1,11 @@
+.vacation,.birthday,.work{
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 15px 18px black;
+  }
+  .first{
+      background-color: black;
+  }
+  .text{
+      z-index:1
+  }

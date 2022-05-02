@@ -39,7 +39,7 @@ const dat={
     }
 }
 const token=jwt.sign(dat,'shhhhhh');
-res.json({token});
+res.json({success:true,token});
 console.log(token);
 
 

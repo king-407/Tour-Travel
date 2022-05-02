@@ -1,5 +1,6 @@
 import { Navbar } from "./Components/Navbar";
 import Notestate from "./Components/context/Notestate";
+import Signup from "./Components/Signup";
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,6 +9,8 @@ import {
 } from "react-router-dom";
 
 import Home from "./Components/Home";
+import Login from "./Components/Login";
+import Intro from "./Components/Intro";
 function App() {
   return (
    
@@ -15,13 +18,20 @@ function App() {
     <Router>
     <Navbar/>
     
-    <div className="container">
+    <div>
     <Switch>
     <Route exact  path="/">
+            <Intro /> 
+         </Route>
+    <Route exact  path="/diary">
             <Home />
           </Route>
-          
-         
+          <Route exact  path="/login">
+            <Login />
+          </Route>
+          <Route exact  path="/signup">
+            <Signup />
+          </Route>
          </Switch>
     
      

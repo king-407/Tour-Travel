@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import NoteContext from './NoteContext'
 import axios from "axios"
+
 const Notestate = (props) => {
+  
     const initial=[];
     const [notes,update]=useState(initial);
     const host = "http://localhost:5000";
@@ -24,7 +26,7 @@ const Notestate = (props) => {
         // update(json);  
         const response=await axios.get(`${host}/api/blog/fetchtravel`,{
             headers:{
-                "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI2YWVjODQ5MWYyYTYyMGZjOGY1ZmMyIn0sImlhdCI6MTY1MTIwODkxOH0.ZsRwIOFN8hQfKrps0lcIAvoITEFhoGz0JXyeerzypMU"
+                "auth-token":localStorage.getItem('token')
             }
         }
        
@@ -41,18 +43,21 @@ const Notestate = (props) => {
    description
     },{
 headers:{
-    "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI2YWVjODQ5MWYyYTYyMGZjOGY1ZmMyIn0sImlhdCI6MTY1MTIwODkxOH0.ZsRwIOFN8hQfKrps0lcIAvoITEFhoGz0JXyeerzypMU"
+    "auth-token":localStorage.getItem('token')
 }} );
 update(notes.concat(response.data));
     }
     
+    
   return (
-    <NoteContext.Provider value={{ notes,showAll,addNote }}>
+    <NoteContext.Provider value={{ notes,showAll,addNote}}>
             {props.children}
         </NoteContext.Provider>
 
     
   )
 }
+
+
 
 export default Notestate
